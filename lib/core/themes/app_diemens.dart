@@ -3,20 +3,16 @@ import 'package:flutter/material.dart';
 class AppDimens {
   static const double BORDER_RADIUS_0 = 0.0;
   static const double BORDER_RADIUS_4 = 4.0;
-  static const double BORDER_RADIUS_5 = 5.0;
   static const double BORDER_RADIUS_6 = 6.0;
   static const double BORDER_RADIUS_8 = 8.0;
-  static const double BORDER_RADIUS_10 = 10.0;
   static const double BORDER_RADIUS_12 = 12.0;
-  static const double BORDER_RADIUS_15 = 15.0;
-  static const double BORDER_RADIUS_18 = 18.0;
-  static const double BORDER_RADIUS_19 = 19.0;
+  static const double BORDER_RADIUS_16 = 16.0;
   static const double BORDER_RADIUS_20 = 20.0;
-  static const double BORDER_RADIUS_23 = 23.0;
+  static const double BORDER_RADIUS_24 = 23.0;
   static const double BORDER_RADIUS_28 = 28.0;
+  static const double BORDER_RADIUS_32 = 32.0;
+  static const double BORDER_RADIUS_36 = 36.0;
   static const double BORDER_RADIUS_40 = 40.0;
-  static const double BORDER_RADIUS_50 = 50.0;
-  static const double BORDER_RADIUS_48 = 48.0;
   static const double BORDER_RADIUS_100 = 100.0;
 
   static const double PADDING_4 = 4.0;
@@ -51,6 +47,7 @@ class AppDimens {
   static const double SPACING_20 = 20.0;
   static const double SPACING_24 = 24.0;
   static const double SPACING_28 = 28.0;
+  static const double SPACING_32 = 32.0;
   static const double SPACING_200 = 200.0;
 
   static const double extent_ratio_0_34 = 0.34;
@@ -130,5 +127,6 @@ class AppDimens {
 
   // *** ICON SIZE *** //
   static const double ICON_SIZE_ACTIVITY = 32.0;
-  static const double ICON_SIZE_CARD_ACTIVITY = 25.0;
+  static const double ICON_SIZE_CARD_ACTIVITY = 24.0;
+  static const double ICON_SIZE_DAILY_GOALS = 32.0;
 }

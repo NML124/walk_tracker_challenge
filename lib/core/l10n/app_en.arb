@@ -3,6 +3,7 @@
   "calories": "calories",
   "steps": "steps",
   "hours": "hours",
+  "sleep":"sleep",
   "activities": "activities",
   "journal": "journal",
   "account": "account",

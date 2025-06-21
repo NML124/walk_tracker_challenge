@@ -21,6 +21,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hours => 'hours';
 
   @override
+  String get sleep => 'sleep';
+
+  @override
   String get activities => 'activities';
 
   @override

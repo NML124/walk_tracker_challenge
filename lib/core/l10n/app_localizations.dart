@@ -122,6 +122,12 @@ abstract class AppLocalizations {
   /// **'hours'**
   String get hours;
 
+  /// No description provided for @sleep.
+  ///
+  /// In en, this message translates to:
+  /// **'sleep'**
+  String get sleep;
+
   /// No description provided for @activities.
   ///
   /// In en, this message translates to:

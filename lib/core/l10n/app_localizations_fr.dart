@@ -21,6 +21,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hours => 'heures';
 
   @override
+  String get sleep => 'Sommeil';
+
+  @override
   String get activities => 'activités';
 
   @override
