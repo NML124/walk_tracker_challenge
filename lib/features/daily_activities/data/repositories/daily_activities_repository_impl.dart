@@ -3,5 +3,5 @@ import '/features/daily_activities/domain/repositories/daily_activities_reposito
 import 'package:dartz/dartz.dart';
 
 class DailyActivitiesRepositoryImpl implements DailyActivitiesRepository {
-  // Add your repository implementation here
+  // Implémente les méthodes ici
 }

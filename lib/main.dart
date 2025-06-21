@@ -1,57 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '/features/daily_activities/presentation/screens/daily_activities_screen.dart';
+import 'features/user_auth/presentation/screens/user_auth_screen.dart';
+import '/features/daily_activities/data/repositories/daily_activities_repository_impl.dart';
+import '/features/daily_activities/presentation/bloc/daily_activities_bloc.dart';
+import '/features/account/data/repositories/account_repository_impl.dart';
+import '/features/account/presentation/bloc/account_bloc.dart';
+import '/features/journal/data/repositories/journal_repository_impl.dart';
+import '/features/journal/presentation/bloc/journal_bloc.dart';
+import '/features/user_auth/data/repositories/user_auth_repository_impl.dart';
+import '/features/user_auth/presentation/bloc/user_auth_bloc.dart';
+
 void main() {
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (_) => DailyActivitiesRepositoryImpl()),
+        RepositoryProvider(create: (_) => AccountRepositoryImpl()),
+        RepositoryProvider(create: (_) => JournalRepositoryImpl()),
+        RepositoryProvider(create: (_) => UserAuthRepositoryImpl()),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => DailyActivitiesBloc(
+              repository: context.read<DailyActivitiesRepositoryImpl>(),
             ),
+          ),
+          BlocProvider(
+            create: (context) =>
+                AccountBloc(repository: context.read<AccountRepositoryImpl>()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                JournalBloc(repository: context.read<JournalRepositoryImpl>()),
+          ),
+          BlocProvider(
+            create: (context) => UserAuthBloc(
+              repository: context.read<UserAuthRepositoryImpl>(),
+            ),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Walk Tracker Challenge',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          ),
+          supportedLocales: const [Locale('en', ''), Locale('fr', '')],
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
+          home: const AuthOrMainScreen(),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), 
     );
   }
-}
+}
+
+class AuthOrMainScreen extends StatelessWidget {
+  const AuthOrMainScreen({super.key});
+
+  bool get isLoggedIn => true; // TODO: Replace with real auth check
+
+  @override
+  Widget build(BuildContext context) {
+    if (isLoggedIn) {
+      // return const DailyActivitiesPage();
+      return DailyActivitiesScreen();
+    } else {
+      return const UserAuthScreen();
+    }
+  }
+}
