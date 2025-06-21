@@ -4,8 +4,8 @@ class AppColors {
   AppColors._(); // Classe statique
 
   // === LIGHT MODE ===
-  static const Color lightBackground = Color(0xFFF0E1D6);
-  static const Color lightPrimaryText = Color(0xFF1E1E1E);
+  static const Color lightBackground = Color(0xFFF6F0EB);
+  static const Color lightPrimaryText = Color(0xFF334566);
   static const Color lightSecondaryText = Color(0xFF666666);
 
   static const Color lightFire = Color(0xFFFF5722);

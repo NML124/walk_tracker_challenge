@@ -1,8 +1,12 @@
 import 'package:intl/intl.dart';
 
 class FormatUtils {
-  static String formatTime(DateTime dateTime) {
-    return DateFormat.Hm().format(dateTime);
+  static String formatTimeHourAndMinute(DateTime dateTime) {
+    return DateFormat.Hm(Intl.getCurrentLocale()).format(dateTime);
+  }
+
+  static String formatTimeMonthAndYear(DateTime dateTime) {
+    return DateFormat.yMMMM(Intl.getCurrentLocale()).format(dateTime);
   }
 
   static String capitalizeFirst(String s) {

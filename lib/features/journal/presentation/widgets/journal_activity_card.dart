@@ -23,7 +23,7 @@ class JournalActivityCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    FormatUtils.formatTime(activity.date),
+                    FormatUtils.formatTimeHourAndMinute(activity.date),
                     style: const TextStyle(
                       fontSize: AppDimens.FONT_SIZE_16,
                       color: Colors.grey,

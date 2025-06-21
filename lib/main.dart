@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walk_tracker_challenge/core/l10n/app_localizations.dart';
+import 'package:walk_tracker_challenge/main_screen.dart';
 import '/core/themes/app_theme.dart';
-import '/features/daily_activities/presentation/screens/daily_activities_screen.dart';
 import 'features/user_auth/presentation/screens/user_auth_screen.dart';
 import '/features/daily_activities/data/repositories/daily_activities_repository_impl.dart';
 import '/features/daily_activities/presentation/bloc/daily_activities_bloc.dart';
@@ -79,8 +79,7 @@ class AuthOrMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isLoggedIn) {
-      // return const DailyActivitiesPage();
-      return DailyActivitiesScreen();
+      return MainScreen();
     } else {
       return const UserAuthScreen();
     }

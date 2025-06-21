@@ -37,7 +37,7 @@ class HealthTipCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 180,
+                  width: 150,
                   child: AutoSizeText(
                     healthTip.title,
                     style: TextStyle(

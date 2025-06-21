@@ -14,32 +14,49 @@ class DailyActivitiesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<DailyActivitiesBloc, DailyActivitiesState>(
-        builder: (context, state) {
-          // Example list of health tips
-          final healthTips = [
-            HealthTip(
-              title: 'A simple way to stay healthy',
-              author: 'Dr Melissa',
-            ),
-            HealthTip(title: 'Drink more water', author: 'Dr John'),
-            HealthTip(title: 'Exercise regularly', author: 'Dr Smith'),
-            HealthTip(
-              title: 'Exercise regularly',
-              author: 'Smith',
-              type: HealthTipType.unofficial,
-            ),
-            HealthTip(title: 'Exercise regularly', author: 'Dr Smith'),
-            HealthTip(title: 'Exercise regularly', author: 'Dr Smith'),
-            HealthTip(title: 'Exercise regularly', author: 'Dr Smith'),
-          ];
+    double height = MediaQuery.sizeOf(context).height;
+    return BlocBuilder<DailyActivitiesBloc, DailyActivitiesState>(
+      builder: (context, state) {
+        // Example list of health tips
+        final healthTips = [
+          HealthTip(
+            title: 'A simple way to stay healthy',
+            author: 'Dr Melissa',
+          ),
+          HealthTip(title: 'Drink more water', author: 'Dr John'),
+          HealthTip(title: 'Exercise regularly', author: 'Dr Smith'),
+          HealthTip(
+            title: 'Exercise regularly',
+            author: 'Smith',
+            type: HealthTipType.unofficial,
+          ),
+          HealthTip(title: 'Exercise regularly', author: 'Dr Smith'),
+          HealthTip(title: 'Exercise regularly', author: 'Dr Smith'),
+          HealthTip(title: 'Exercise regularly', author: 'Dr Smith'),
+        ];
 
-          return SingleChildScrollView(
-            child: Padding(
-              padding: AppDimens.paddingAll32,
-              child: Column(
+        return Padding(
+          padding: AppDimens.paddingAll32,
+          child: Stack(
+            children: [
+              Column(
                 children: [
+                  SizedBox(height: (height * 3 / 4) - AppDimens.PADDING_32),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: healthTips.length,
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final tip = healthTips[index];
+                        return HealthTipCard(healthTip: tip);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  SizedBox(height: (height / 4)),
                   Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,22 +91,12 @@ class DailyActivitiesScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: AppDimens.SPACING_200),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: healthTips.length,
-                    itemBuilder: (context, index) {
-                      final tip = healthTips[index];
-                      return HealthTipCard(healthTip: tip);
-                    },
-                  ),
                 ],
               ),
-            ),
-          );
-        },
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

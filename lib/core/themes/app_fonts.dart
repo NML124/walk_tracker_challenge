@@ -10,5 +10,19 @@ import 'package:flutter/material.dart';
 // FontWeight.w900: Ultra Bold
 
 class AppFonts {
-	//TODO: add fonts here
+  static const String fontFamily = 'Roboto';
+
+  static const TextStyle regular = TextStyle(
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.w400,
+  );
+  static const TextStyle medium = TextStyle(
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.w500,
+  );
+  static const TextStyle bold = TextStyle(
+    fontFamily: fontFamily,
+    fontWeight: FontWeight.w700,
+  );
+  // Add more styles as needed
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:walk_tracker_challenge/core/themes/app_diemens.dart';
+import 'package:walk_tracker_challenge/core/themes/app_fonts.dart';
 import '/core/themes/app_colors.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
+    fontFamily: AppFonts.fontFamily,
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.lightBackground,
     primaryColor: AppColors.lightNavActive,
@@ -14,11 +17,11 @@ class AppTheme {
     ),
     textTheme: const TextTheme(
       headlineLarge: TextStyle(
-        fontSize: 48,
+        fontSize: AppDimens.FONT_SIZE_48,
         fontWeight: FontWeight.bold,
         color: AppColors.lightPrimaryText,
       ),
-      bodyLarge: TextStyle(fontSize: 16, color: AppColors.lightSecondaryText),
+      bodyLarge: TextStyle(fontSize: AppDimens.FONT_SIZE_16, color: AppColors.lightSecondaryText),
     ),
     iconTheme: const IconThemeData(color: AppColors.lightNavInactive),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -35,6 +38,7 @@ class AppTheme {
   );
 
   static ThemeData darkTheme = ThemeData(
+    fontFamily: AppFonts.fontFamily,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.darkBackground,
     primaryColor: AppColors.darkNavActive,
