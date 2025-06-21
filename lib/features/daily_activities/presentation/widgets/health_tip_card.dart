@@ -19,6 +19,7 @@ class HealthTipCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.sizeOf(context).width;
     return Card(
       child: Padding(
         padding: AppDimens.paddingAll16,
@@ -37,7 +38,7 @@ class HealthTipCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 150,
+                  width: width - 2 * (AppDimens.PADDING_16) - 224,
                   child: AutoSizeText(
                     healthTip.title,
                     style: TextStyle(
