@@ -30,7 +30,6 @@ class AppDimens {
   static const double PADDING_20 = 20.0;
   static const double PADDING_24 = 24.0;
   static const double PADDING_28 = 28.0;
-  static const double PADDING_200 = 200.0;
 
   static const double MARGIN_4 = 4.0;
   static const double MARGIN_6 = 6.0;
@@ -40,6 +39,19 @@ class AppDimens {
 
   static const double MARGIN_16 = 16.0;
   static const double MARGIN_24 = 24.0;
+
+  static const double SPACING_4 = 4.0;
+  static const double SPACING_6 = 6.0;
+  static const double SPACING_8 = 8.0;
+  static const double SPACING_10 = 10.0;
+  static const double SPACING_12 = 12.0;
+  static const double SPACING_14 = 14.0;
+  static const double SPACING_16 = 16.0;
+  static const double SPACING_18 = 18.0;
+  static const double SPACING_20 = 20.0;
+  static const double SPACING_24 = 24.0;
+  static const double SPACING_28 = 28.0;
+  static const double SPACING_200 = 200.0;
 
   static const double extent_ratio_0_34 = 0.34;
 
@@ -113,6 +125,8 @@ class AppDimens {
 
   static const double FONT_SIZE_TITLE = 18.0;
   static const double FONT_SIZE_AUTHOR = 16.0;
+  static const double FONT_SIZE_16 = 16.0;
+  static const double FONT_SIZE_20 = 20.0;
 
   // *** ICON SIZE *** //
   static const double ICON_SIZE_ACTIVITY = 32.0;

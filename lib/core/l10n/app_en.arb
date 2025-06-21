@@ -9,5 +9,22 @@
   "dailyGoals": "daily goals",
   "profile": "profile",
   "yearsOld": "years old",
-  "login": "login"
+  "login": "login",
+  "morningWalk": "Morning Walk",
+  "afternoonWalk": "Afternoon Walk",
+  "eveningWalk": "Evening Walk",
+  "walkDistanceTime": "{distance}km in {duration}mins",
+  "@walkDistanceTime": {
+    "description": "Displays walking distance and duration",
+    "placeholders": {
+      "distance": {
+        "type": "double",
+        "example": "2"
+      },
+      "duration": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  }
 }

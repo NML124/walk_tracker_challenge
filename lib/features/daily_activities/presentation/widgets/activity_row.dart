@@ -26,7 +26,7 @@ class ActivityRow extends StatelessWidget {
             size: AppDimens.ICON_SIZE_ACTIVITY,
             color: iconColor,
           ),
-          SizedBox(width: AppDimens.PADDING_10),
+          SizedBox(width: AppDimens.SPACING_10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

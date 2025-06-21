@@ -40,4 +40,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get login => 'login';
+
+  @override
+  String get morningWalk => 'Morning Walk';
+
+  @override
+  String get afternoonWalk => 'Afternoon Walk';
+
+  @override
+  String get eveningWalk => 'Evening Walk';
+
+  @override
+  String walkDistanceTime(double distance, int duration) {
+    return '${distance}km in ${duration}mins';
+  }
 }

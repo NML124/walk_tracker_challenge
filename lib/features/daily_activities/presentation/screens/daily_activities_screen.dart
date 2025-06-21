@@ -74,7 +74,7 @@ class DailyActivitiesScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: AppDimens.PADDING_200),
+                  SizedBox(height: AppDimens.SPACING_200),
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),

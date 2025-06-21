@@ -9,5 +9,22 @@
   "dailyGoals": "objectifs quotidiens",
   "profile": "profil",
   "yearsOld": "ans",
-  "login": "se connecter"
+  "login": "se connecter",
+  "morningWalk": "Marche du matin",
+  "afternoonWalk": "Marche de l'après-midi",
+  "eveningWalk": "Marche du soir",
+  "walkDistanceTime": "{distance} km en {duration} min",
+  "@walkDistanceTime": {
+    "description": "Affiche la distance de marche et la durée",
+    "placeholders": {
+      "distance": {
+        "type": "double",
+        "example": "2"
+      },
+      "duration": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  }
 }

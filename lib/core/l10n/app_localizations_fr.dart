@@ -40,4 +40,18 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get login => 'se connecter';
+
+  @override
+  String get morningWalk => 'Marche du matin';
+
+  @override
+  String get afternoonWalk => 'Marche de l\'après-midi';
+
+  @override
+  String get eveningWalk => 'Marche du soir';
+
+  @override
+  String walkDistanceTime(double distance, int duration) {
+    return '$distance km en $duration min';
+  }
 }

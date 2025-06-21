@@ -163,6 +163,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'login'**
   String get login;
+
+  /// No description provided for @morningWalk.
+  ///
+  /// In en, this message translates to:
+  /// **'Morning Walk'**
+  String get morningWalk;
+
+  /// No description provided for @afternoonWalk.
+  ///
+  /// In en, this message translates to:
+  /// **'Afternoon Walk'**
+  String get afternoonWalk;
+
+  /// No description provided for @eveningWalk.
+  ///
+  /// In en, this message translates to:
+  /// **'Evening Walk'**
+  String get eveningWalk;
+
+  /// Displays walking distance and duration
+  ///
+  /// In en, this message translates to:
+  /// **'{distance}km in {duration}mins'**
+  String walkDistanceTime(double distance, int duration);
 }
 
 class _AppLocalizationsDelegate
