@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:walk_tracker_challenge/core/l10n/app_localizations.dart';
 import '/features/user_auth/presentation/bloc/user_auth_state.dart';
 import '../bloc/user_auth_bloc.dart';
 
@@ -11,9 +12,7 @@ class UserAuthScreen extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder<UserAuthBloc, UserAuthState>(
         builder: (context, state) {
-          return const Center(
-            child: Text('UserAuth Screen'),
-          );
+          return Center(child: Text(AppLocalizations.of(context)!.login));
         },
       ),
     );
