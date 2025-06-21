@@ -18,14 +18,9 @@ class AppTheme {
         fontWeight: FontWeight.bold,
         color: AppColors.lightPrimaryText,
       ),
-      bodyLarge: TextStyle(
-        fontSize: 16,
-        color: AppColors.lightSecondaryText,
-      ),
+      bodyLarge: TextStyle(fontSize: 16, color: AppColors.lightSecondaryText),
     ),
-    iconTheme: const IconThemeData(
-      color: AppColors.lightNavInactive,
-    ),
+    iconTheme: const IconThemeData(color: AppColors.lightNavInactive),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
       selectedItemColor: AppColors.lightNavActive,
@@ -35,6 +30,7 @@ class AppTheme {
       primary: AppColors.lightNavActive,
       secondary: AppColors.lightAccent,
     ),
+    cardTheme: CardThemeData(elevation: 0),
     useMaterial3: true,
   );
 
@@ -54,14 +50,9 @@ class AppTheme {
         fontWeight: FontWeight.bold,
         color: AppColors.darkPrimaryText,
       ),
-      bodyLarge: TextStyle(
-        fontSize: 16,
-        color: AppColors.darkSecondaryText,
-      ),
+      bodyLarge: TextStyle(fontSize: 16, color: AppColors.darkSecondaryText),
     ),
-    iconTheme: const IconThemeData(
-      color: AppColors.darkNavInactive,
-    ),
+    iconTheme: const IconThemeData(color: AppColors.darkNavInactive),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Color(0xFF1E1E1E),
       selectedItemColor: AppColors.darkNavActive,
@@ -71,6 +62,7 @@ class AppTheme {
       primary: AppColors.darkNavActive,
       secondary: AppColors.darkAccent,
     ),
+    cardTheme: CardThemeData(elevation: 0),
     useMaterial3: true,
   );
 }

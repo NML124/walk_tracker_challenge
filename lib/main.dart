@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
           title: 'Walk Tracker Challenge',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
+          debugShowCheckedModeBanner: false,
           themeMode: ThemeMode.system,
           supportedLocales: const [Locale('en', ''), Locale('fr', '')],
           localizationsDelegates: const [

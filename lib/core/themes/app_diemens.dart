@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class AppDimens {
   static const double BORDER_RADIUS_0 = 0.0;
   static const double BORDER_RADIUS_4 = 4.0;
@@ -31,6 +30,7 @@ class AppDimens {
   static const double PADDING_20 = 20.0;
   static const double PADDING_24 = 24.0;
   static const double PADDING_28 = 28.0;
+  static const double PADDING_200 = 200.0;
 
   static const double MARGIN_4 = 4.0;
   static const double MARGIN_6 = 6.0;
@@ -89,7 +89,10 @@ class AppDimens {
   static const paddingAll32 = EdgeInsets.all(32);
 
   //** SYMMETRIC **//
-  static const paddingV20H32 = EdgeInsets.symmetric(vertical: 20, horizontal: 32);
+  static const paddingV20H32 = EdgeInsets.symmetric(
+    vertical: 20,
+    horizontal: 32,
+  );
   static const paddingH16 = EdgeInsets.symmetric(horizontal: 16);
 
   //** ONLY **//
@@ -105,4 +108,13 @@ class AppDimens {
 
   // ** VERTICAL **//
   static final radiusTop25 = BorderRadius.vertical(top: Radius.circular(25));
+
+  // *** FONT SIZE *** //
+
+  static const double FONT_SIZE_TITLE = 18.0;
+  static const double FONT_SIZE_AUTHOR = 16.0;
+
+  // *** ICON SIZE *** //
+  static const double ICON_SIZE_ACTIVITY = 32.0;
+  static const double ICON_SIZE_CARD_ACTIVITY = 25.0;
 }
