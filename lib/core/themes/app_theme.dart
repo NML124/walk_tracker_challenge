@@ -1,5 +1,76 @@
 import 'package:flutter/material.dart';
+import '/core/themes/app_colors.dart';
 
 class AppTheme {
-	//TODO: add App themes here
+  static ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
+    scaffoldBackgroundColor: AppColors.lightBackground,
+    primaryColor: AppColors.lightNavActive,
+    cardColor: AppColors.lightCardBackground,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.lightBackground,
+      foregroundColor: AppColors.lightPrimaryText,
+      elevation: 0,
+    ),
+    textTheme: const TextTheme(
+      headlineLarge: TextStyle(
+        fontSize: 48,
+        fontWeight: FontWeight.bold,
+        color: AppColors.lightPrimaryText,
+      ),
+      bodyLarge: TextStyle(
+        fontSize: 16,
+        color: AppColors.lightSecondaryText,
+      ),
+    ),
+    iconTheme: const IconThemeData(
+      color: AppColors.lightNavInactive,
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedItemColor: AppColors.lightNavActive,
+      unselectedItemColor: AppColors.lightNavInactive,
+    ),
+    colorScheme: const ColorScheme.light(
+      primary: AppColors.lightNavActive,
+      secondary: AppColors.lightAccent,
+    ),
+    useMaterial3: true,
+  );
+
+  static ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: AppColors.darkBackground,
+    primaryColor: AppColors.darkNavActive,
+    cardColor: AppColors.darkCardBackground,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.darkBackground,
+      foregroundColor: AppColors.darkPrimaryText,
+      elevation: 0,
+    ),
+    textTheme: const TextTheme(
+      headlineLarge: TextStyle(
+        fontSize: 48,
+        fontWeight: FontWeight.bold,
+        color: AppColors.darkPrimaryText,
+      ),
+      bodyLarge: TextStyle(
+        fontSize: 16,
+        color: AppColors.darkSecondaryText,
+      ),
+    ),
+    iconTheme: const IconThemeData(
+      color: AppColors.darkNavInactive,
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Color(0xFF1E1E1E),
+      selectedItemColor: AppColors.darkNavActive,
+      unselectedItemColor: AppColors.darkNavInactive,
+    ),
+    colorScheme: const ColorScheme.dark(
+      primary: AppColors.darkNavActive,
+      secondary: AppColors.darkAccent,
+    ),
+    useMaterial3: true,
+  );
 }

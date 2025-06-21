@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walk_tracker_challenge/core/l10n/app_localizations.dart';
+import '/core/themes/app_theme.dart';
 import '/features/daily_activities/presentation/screens/daily_activities_screen.dart';
 import 'features/user_auth/presentation/screens/user_auth_screen.dart';
 import '/features/daily_activities/data/repositories/daily_activities_repository_impl.dart';
@@ -52,9 +53,9 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           title: 'Walk Tracker Challenge',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          ),
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeMode.system,
           supportedLocales: const [Locale('en', ''), Locale('fr', '')],
           localizationsDelegates: const [
             AppLocalizations.delegate,
