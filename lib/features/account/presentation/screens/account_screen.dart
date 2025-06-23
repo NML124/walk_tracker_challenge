@@ -18,8 +18,12 @@ class AccountScreen extends StatelessWidget {
       body: BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
           return Container(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            padding: AppDimens.paddingAll32,
+            color: Colors.white,
+            padding: EdgeInsetsGeometry.only(
+              top: AppDimens.PADDING_32,
+              left: AppDimens.PADDING_32,
+              right: AppDimens.PADDING_32,
+            ),
             child: Column(
               spacing: AppDimens.SPACING_32,
               children: [

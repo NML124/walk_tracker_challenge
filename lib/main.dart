@@ -13,8 +13,11 @@ import '/features/journal/data/repositories/journal_repository_impl.dart';
 import '/features/journal/presentation/bloc/journal_bloc.dart';
 import '/features/user_auth/data/repositories/user_auth_repository_impl.dart';
 import '/features/user_auth/presentation/bloc/user_auth_bloc.dart';
+import 'package:rive_native/rive_native.dart' as rive;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await rive.RiveNative.init();
   runApp(const MyApp());
 }
 
@@ -56,7 +59,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.system,
+          themeMode: ThemeMode.light,
           supportedLocales: const [Locale('en', ''), Locale('fr', '')],
           localizationsDelegates: const [
             AppLocalizations.delegate,

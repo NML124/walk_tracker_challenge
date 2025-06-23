@@ -36,7 +36,11 @@ class DailyActivitiesScreen extends StatelessWidget {
         ];
 
         return Padding(
-          padding: AppDimens.paddingAll32,
+          padding: EdgeInsetsGeometry.only(
+            top: AppDimens.PADDING_32,
+            left: AppDimens.PADDING_32,
+            right: AppDimens.PADDING_32,
+          ),
           child: Stack(
             children: [
               Column(

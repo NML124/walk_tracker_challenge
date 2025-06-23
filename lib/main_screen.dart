@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:walk_tracker_challenge/core/l10n/app_localizations.dart';
+import 'package:walk_tracker_challenge/core/themes/app_colors.dart';
+import 'package:walk_tracker_challenge/core/themes/app_diemens.dart';
 import 'package:walk_tracker_challenge/core/widgets/main_feature_cards_animation.dart';
 import 'package:walk_tracker_challenge/core/widgets/rive_circle_controller.dart';
 import 'package:walk_tracker_challenge/features/account/presentation/screens/account_screen.dart';
@@ -16,15 +18,23 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   PageController pageController = PageController();
   ValueNotifier<double> scrollXPosition = ValueNotifier(0.0);
+  int newPage = 0;
   double width = 0.0;
   double height = 0.0;
   int actualPage = 0;
+
   @override
   void initState() {
     pageController.addListener(() {
       scrollXPosition.value = (pageController.offset / width);
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollXPosition.dispose();
+    super.dispose();
   }
 
   @override
@@ -45,8 +55,8 @@ class _MainScreenState extends State<MainScreen> {
           ValueListenableBuilder(
             valueListenable: scrollXPosition,
             builder: (context, value, child) {
-              // Met à jour actualPage quand on passe un palier (1, 2, ...)
-              int newPage = value.round().clamp(0, 2);
+              // Updates currentPage when passing a milestone (1, 2, ...)
+              newPage = value.round().clamp(0, 2);
               if (actualPage != newPage) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   setState(() {
@@ -57,27 +67,42 @@ class _MainScreenState extends State<MainScreen> {
               return MainFeatureCardsAnimation(animValue: value);
             },
           ),
-         /* ValueListenableBuilder(
+          ValueListenableBuilder(
             valueListenable: scrollXPosition,
             builder: (context, value, child) {
               return Transform.translate(
-                offset: Offset(width / 3, height / 2),
+                offset: Offset(
+                  (width / 2) - AppDimens.PADDING_32,
+                  (height * 3 / 4) - AppDimens.PADDING_32 - 200,
+                ),
                 child: SizedBox(
-                  width: 500,
-                  height: 500,
+                  width: width / 2,
+                  height: 200,
                   child: RiveCircleController(
-                    thickness: 3,
-                    colorSleep: Colors.blue,
-                    colorSteps: Colors.green,
-                    colorCalories: Colors.red,
-                    percentageSleep: 0.7,
-                    percentageSteps: 0.5,
-                    percentageCalories: 0.9,
+                    thickness: 15 - (value * 15),
+                    colorSleep: Theme.of(context).brightness == Brightness.dark
+                        ? AppColors.darkSleep
+                        : AppColors.lightSleep,
+                    colorSteps: Theme.of(context).brightness == Brightness.dark
+                        ? AppColors.darkSteps
+                        : AppColors.lightSteps,
+                    colorCalories:
+                        Theme.of(context).brightness == Brightness.dark
+                        ? AppColors.darkFire
+                        : AppColors.lightFire,
+                    percentageSleep: 60 - (value * 20),
+                    percentageSteps: 65 - (value * 20),
+                    percentageCalories: 70 - (value * 20),
+                    init: () {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        setState(() {});
+                      });
+                    },
                   ),
                 ),
               );
             },
-          ),*/
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

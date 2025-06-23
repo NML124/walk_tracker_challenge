@@ -64,7 +64,11 @@ class JournalScreen extends StatelessWidget {
       body: BlocBuilder<JournalBloc, JournalState>(
         builder: (context, state) {
           return Padding(
-            padding: AppDimens.paddingAll32,
+            padding: EdgeInsetsGeometry.only(
+            top: AppDimens.PADDING_32,
+            left: AppDimens.PADDING_32,
+            right: AppDimens.PADDING_32,
+          ),
             child: Column(
               children: [
                 SizedBox(height: (height * 3 / 4)-AppDimens.PADDING_32),
