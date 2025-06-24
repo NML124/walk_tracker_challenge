@@ -44,6 +44,49 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          ValueListenableBuilder(
+            valueListenable: scrollXPosition,
+            builder: (context, value, child) {
+              if (scrollXPosition.value <= 1) {
+                return Transform.translate(
+                  offset: Offset(
+                    (width / 2) - AppDimens.PADDING_32,
+                    (height * 3 / 4) - AppDimens.PADDING_32 - 200,
+                  ),
+                  child: SizedBox(
+                    width: width / 2,
+                    height: 200,
+                    child: RiveCircleController(
+                      thickness: 15 - (value * 15),
+                      colorSleep:
+                          Theme.of(context).brightness == Brightness.dark
+                          ? AppColors.darkSleep
+                          : AppColors.lightSleep,
+                      colorSteps:
+                          Theme.of(context).brightness == Brightness.dark
+                          ? AppColors.darkSteps
+                          : AppColors.lightSteps,
+                      colorCalories:
+                          Theme.of(context).brightness == Brightness.dark
+                          ? AppColors.darkFire
+                          : AppColors.lightFire,
+                      percentageSleep: 60 - (value * 20),
+                      percentageSteps: 65 - (value * 20),
+                      percentageCalories: 70 - (value * 20),
+                      init: () {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          setState(() {});
+                        });
+                      },
+                    ),
+                  ),
+                );
+              } else {
+                return SizedBox();
+              }
+            },
+          ),
+
           PageView(
             controller: pageController,
             children: [
@@ -65,42 +108,6 @@ class _MainScreenState extends State<MainScreen> {
                 });
               }
               return MainFeatureCardsAnimation(animValue: value);
-            },
-          ),
-          ValueListenableBuilder(
-            valueListenable: scrollXPosition,
-            builder: (context, value, child) {
-              return Transform.translate(
-                offset: Offset(
-                  (width / 2) - AppDimens.PADDING_32,
-                  (height * 3 / 4) - AppDimens.PADDING_32 - 200,
-                ),
-                child: SizedBox(
-                  width: width / 2,
-                  height: 200,
-                  child: RiveCircleController(
-                    thickness: 15 - (value * 15),
-                    colorSleep: Theme.of(context).brightness == Brightness.dark
-                        ? AppColors.darkSleep
-                        : AppColors.lightSleep,
-                    colorSteps: Theme.of(context).brightness == Brightness.dark
-                        ? AppColors.darkSteps
-                        : AppColors.lightSteps,
-                    colorCalories:
-                        Theme.of(context).brightness == Brightness.dark
-                        ? AppColors.darkFire
-                        : AppColors.lightFire,
-                    percentageSleep: 60 - (value * 20),
-                    percentageSteps: 65 - (value * 20),
-                    percentageCalories: 70 - (value * 20),
-                    init: () {
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        setState(() {});
-                      });
-                    },
-                  ),
-                ),
-              );
             },
           ),
         ],
