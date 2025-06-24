@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:walk_tracker_challenge/core/l10n/app_localizations.dart';
-import 'package:walk_tracker_challenge/core/themes/app_colors.dart';
-import 'package:walk_tracker_challenge/core/themes/app_diemens.dart';
 import 'package:walk_tracker_challenge/core/widgets/main_feature_cards_animation.dart';
-import 'package:walk_tracker_challenge/core/widgets/rive_circle_controller.dart';
+import 'package:walk_tracker_challenge/core/widgets/rive_circle_animation_section.dart';
 import 'package:walk_tracker_challenge/features/account/presentation/screens/account_screen.dart';
 import 'package:walk_tracker_challenge/features/journal/presentation/screens/journal_screen.dart';
 import '/features/daily_activities/presentation/screens/daily_activities_screen.dart';
@@ -47,43 +45,11 @@ class _MainScreenState extends State<MainScreen> {
           ValueListenableBuilder(
             valueListenable: scrollXPosition,
             builder: (context, value, child) {
-              if (scrollXPosition.value <= 1) {
-                return Transform.translate(
-                  offset: Offset(
-                    (width / 2) - AppDimens.PADDING_32,
-                    (height * 3 / 4) - AppDimens.PADDING_32 - 200,
-                  ),
-                  child: SizedBox(
-                    width: width / 2,
-                    height: 200,
-                    child: RiveCircleController(
-                      thickness: 15 - (value * 15),
-                      colorSleep:
-                          Theme.of(context).brightness == Brightness.dark
-                          ? AppColors.darkSleep
-                          : AppColors.lightSleep,
-                      colorSteps:
-                          Theme.of(context).brightness == Brightness.dark
-                          ? AppColors.darkSteps
-                          : AppColors.lightSteps,
-                      colorCalories:
-                          Theme.of(context).brightness == Brightness.dark
-                          ? AppColors.darkFire
-                          : AppColors.lightFire,
-                      percentageSleep: 60 - (value * 20),
-                      percentageSteps: 65 - (value * 20),
-                      percentageCalories: 70 - (value * 20),
-                      init: () {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          setState(() {});
-                        });
-                      },
-                    ),
-                  ),
-                );
-              } else {
-                return SizedBox();
-              }
+              return RiveCircleAnimationSection(
+                value: value,
+                width: width,
+                height: height,
+              );
             },
           ),
 
