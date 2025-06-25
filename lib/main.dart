@@ -5,6 +5,7 @@ import 'package:walk_tracker_challenge/core/l10n/app_localizations.dart';
 import 'package:walk_tracker_challenge/main_screen.dart';
 import '/core/themes/app_theme.dart';
 import 'features/user_auth/presentation/screens/user_auth_screen.dart';
+import '/core/bloc/app_settings_bloc.dart';
 import '/features/daily_activities/data/repositories/daily_activities_repository_impl.dart';
 import '/features/daily_activities/presentation/bloc/daily_activities_bloc.dart';
 import '/features/account/data/repositories/account_repository_impl.dart';
@@ -26,48 +27,59 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider(create: (_) => DailyActivitiesRepositoryImpl()),
-        RepositoryProvider(create: (_) => AccountRepositoryImpl()),
-        RepositoryProvider(create: (_) => JournalRepositoryImpl()),
-        RepositoryProvider(create: (_) => UserAuthRepositoryImpl()),
-      ],
-      child: MultiBlocProvider(
+    return BlocProvider(
+      create: (_) => AppSettingsBloc(),
+      child: MultiRepositoryProvider(
         providers: [
-          BlocProvider(
-            create: (context) => DailyActivitiesBloc(
-              repository: context.read<DailyActivitiesRepositoryImpl>(),
-            ),
-          ),
-          BlocProvider(
-            create: (context) =>
-                AccountBloc(repository: context.read<AccountRepositoryImpl>()),
-          ),
-          BlocProvider(
-            create: (context) =>
-                JournalBloc(repository: context.read<JournalRepositoryImpl>()),
-          ),
-          BlocProvider(
-            create: (context) => UserAuthBloc(
-              repository: context.read<UserAuthRepositoryImpl>(),
-            ),
-          ),
+          RepositoryProvider(create: (_) => DailyActivitiesRepositoryImpl()),
+          RepositoryProvider(create: (_) => AccountRepositoryImpl()),
+          RepositoryProvider(create: (_) => JournalRepositoryImpl()),
+          RepositoryProvider(create: (_) => UserAuthRepositoryImpl()),
         ],
-        child: MaterialApp(
-          title: 'Walk Tracker Challenge',
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.light,
-          supportedLocales: const [Locale('en', ''), Locale('fr', '')],
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => DailyActivitiesBloc(
+                repository: context.read<DailyActivitiesRepositoryImpl>(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => AccountBloc(
+                repository: context.read<AccountRepositoryImpl>(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => JournalBloc(
+                repository: context.read<JournalRepositoryImpl>(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => UserAuthBloc(
+                repository: context.read<UserAuthRepositoryImpl>(),
+              ),
+            ),
           ],
-          home: const AuthOrMainScreen(),
+          child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
+            builder: (context, settingsState) {
+              print("I build");
+              return MaterialApp(
+                title: 'Walk Tracker Challenge',
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                debugShowCheckedModeBanner: false,
+                themeMode: settingsState.themeMode,
+                supportedLocales: const [Locale('en', ''), Locale('fr', '')],
+                locale: settingsState.locale,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                home: const AuthOrMainScreen(),
+              );
+            },
+          ),
         ),
       ),
     );

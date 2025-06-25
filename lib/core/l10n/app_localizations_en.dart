@@ -57,4 +57,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String walkDistanceTime(double distance, int duration) {
     return '${distance}km in ${duration}mins';
   }
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get themeMode => 'Theme Mode';
+
+  @override
+  String get language => 'Language';
 }

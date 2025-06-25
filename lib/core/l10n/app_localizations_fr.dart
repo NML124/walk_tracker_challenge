@@ -57,4 +57,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String walkDistanceTime(double distance, int duration) {
     return '$distance km en $duration min';
   }
+
+  @override
+  String get settings => 'Paramètres';
+
+  @override
+  String get themeMode => 'Mode Thème';
+
+  @override
+  String get language => 'Langue';
 }

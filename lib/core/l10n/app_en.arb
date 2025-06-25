@@ -27,5 +27,8 @@
         "example": "30"
       }
     }
-  }
+  },
+  "settings": "Settings",
+  "themeMode": "Theme Mode",
+  "language": "Language"
 }
