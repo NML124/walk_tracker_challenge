@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walk_tracker_challenge/core/l10n/app_localizations.dart';
 import 'package:walk_tracker_challenge/core/themes/app_diemens.dart';
+import 'package:walk_tracker_challenge/core/widgets/anim_perso.dart';
 import 'package:walk_tracker_challenge/core/widgets/main_feature_cards_animation.dart';
 import 'package:walk_tracker_challenge/core/widgets/rive_circle_animation_section.dart';
 import 'package:walk_tracker_challenge/core/widgets/rive_circle_controller.dart';
@@ -112,6 +113,16 @@ class _MainScreenState extends State<MainScreen> {
                 });
               }
               return MainFeatureCardsAnimation(animValue: value);
+            },
+          ),
+          ValueListenableBuilder(
+            valueListenable: scrollXPosition,
+            builder: (context, value, child) {
+              return AnimPerso(
+                animationScrollX: value,
+                height: height,
+                width: width,
+              );
             },
           ),
         ],
