@@ -60,33 +60,31 @@ class JournalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
-    return Scaffold(
-      body: BlocBuilder<JournalBloc, JournalState>(
-        builder: (context, state) {
-          return Padding(
-            padding: EdgeInsetsGeometry.only(
+    return BlocBuilder<JournalBloc, JournalState>(
+      builder: (context, state) {
+        return Padding(
+          padding: EdgeInsetsGeometry.only(
             top: AppDimens.PADDING_32,
             left: AppDimens.PADDING_32,
             right: AppDimens.PADDING_32,
           ),
-            child: Column(
-              children: [
-                SizedBox(height: (height * 3 / 4)-AppDimens.PADDING_32),
-                Expanded(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    itemCount: demoActivities.length,
-                    itemBuilder: (context, index) {
-                      final activity = demoActivities[index];
-                      return JournalActivityCard(activity: activity);
-                    },
-                  ),
+          child: Column(
+            children: [
+              SizedBox(height: (height * 3 / 4) - AppDimens.PADDING_32),
+              Expanded(
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  itemCount: demoActivities.length,
+                  itemBuilder: (context, index) {
+                    final activity = demoActivities[index];
+                    return JournalActivityCard(activity: activity);
+                  },
                 ),
-              ],
-            ),
-          );
-        },
-      ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

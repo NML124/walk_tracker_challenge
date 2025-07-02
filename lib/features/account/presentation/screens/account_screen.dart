@@ -16,75 +16,70 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
-    return Scaffold(
-      body: BlocBuilder<AccountBloc, AccountState>(
-        builder: (context, state) {
-          return ClipPath(
-            clipper: CircleClipper(),
-            child: Container(
-              color: Colors.white,
-              padding: EdgeInsetsGeometry.only(
-                top: AppDimens.PADDING_32,
-                left: AppDimens.PADDING_32,
-                right: AppDimens.PADDING_32,
-              ),
-              child: Column(
-                children: [
-                  Container(height: height * 2 / 5 + width * 0.35),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        spacing: AppDimens.SPACING_12,
-                        children: [
-                          Text(
-                            FormatUtils.capitalizeFirst(
-                              AppLocalizations.of(context)!.dailyGoals,
-                            ),
-                            style: TextStyle(fontSize: AppDimens.FONT_SIZE_20),
+    return BlocBuilder<AccountBloc, AccountState>(
+      builder: (context, state) {
+        return ClipPath(
+          clipper: CircleClipper(),
+          child: Container(
+            color: Colors.white,
+            padding: EdgeInsetsGeometry.only(
+              top: AppDimens.PADDING_32,
+              left: AppDimens.PADDING_32,
+              right: AppDimens.PADDING_32,
+            ),
+            child: Column(
+              children: [
+                Container(height: height * 2 / 5 + width * 0.35),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      spacing: AppDimens.SPACING_12,
+                      children: [
+                        Text(
+                          FormatUtils.capitalizeFirst(
+                            AppLocalizations.of(context)!.dailyGoals,
                           ),
-                          DailyGoalCard(
-                            icon: Icons.local_fire_department_sharp,
-                            label: FormatUtils.capitalizeFirst(
-                              AppLocalizations.of(context)!.calories,
-                            ),
-                            value: "2,000",
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? AppColors.darkFire
-                                : AppColors.lightFire,
+                          style: TextStyle(fontSize: AppDimens.FONT_SIZE_20),
+                        ),
+                        DailyGoalCard(
+                          icon: Icons.local_fire_department_sharp,
+                          label: FormatUtils.capitalizeFirst(
+                            AppLocalizations.of(context)!.calories,
                           ),
-                          DailyGoalCard(
-                            icon: Icons.directions_walk,
-                            label: FormatUtils.capitalizeFirst(
-                              AppLocalizations.of(context)!.steps,
-                            ),
-                            value: "3,500",
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? AppColors.darkSteps
-                                : AppColors.lightSteps,
+                          value: "2,000",
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? AppColors.darkFire
+                              : AppColors.lightFire,
+                        ),
+                        DailyGoalCard(
+                          icon: Icons.directions_walk,
+                          label: FormatUtils.capitalizeFirst(
+                            AppLocalizations.of(context)!.steps,
                           ),
-                          DailyGoalCard(
-                            icon: Icons.nights_stay,
-                            label: FormatUtils.capitalizeFirst(
-                              AppLocalizations.of(context)!.sleep,
-                            ),
-                            value: "8h",
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? AppColors.darkSleep
-                                : AppColors.lightSleep,
+                          value: "3,500",
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? AppColors.darkSteps
+                              : AppColors.lightSteps,
+                        ),
+                        DailyGoalCard(
+                          icon: Icons.nights_stay,
+                          label: FormatUtils.capitalizeFirst(
+                            AppLocalizations.of(context)!.sleep,
                           ),
-                        ],
-                      ),
+                          value: "8h",
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? AppColors.darkSleep
+                              : AppColors.lightSleep,
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

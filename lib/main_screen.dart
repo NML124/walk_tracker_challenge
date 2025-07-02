@@ -91,7 +91,17 @@ class _MainScreenState extends State<MainScreen> {
               );
             },
           ),
-
+          ValueListenableBuilder(
+            valueListenable: scrollXPosition,
+            builder: (context, value, child) {
+              return AnimPerso(
+                page: actualPage,
+                animationScrollX: value,
+                height: height,
+                width: width,
+              );
+            },
+          ),
           PageView(
             controller: pageController,
             children: [
@@ -113,16 +123,6 @@ class _MainScreenState extends State<MainScreen> {
                 });
               }
               return MainFeatureCardsAnimation(animValue: value);
-            },
-          ),
-          ValueListenableBuilder(
-            valueListenable: scrollXPosition,
-            builder: (context, value, child) {
-              return AnimPerso(
-                animationScrollX: value,
-                height: height,
-                width: width,
-              );
             },
           ),
         ],
