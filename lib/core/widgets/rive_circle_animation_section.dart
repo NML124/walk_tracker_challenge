@@ -16,7 +16,6 @@ class RiveCircleAnimationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (value > 1) return const SizedBox();
     return Transform.translate(
       offset: Offset(
         (width / 2) - AppDimens.PADDING_32,
@@ -26,7 +25,7 @@ class RiveCircleAnimationSection extends StatelessWidget {
         width: width / 2,
         height: 200,
         child: RiveCircleController(
-          thickness: 15 - (value * 15),
+          thickness: (value >= 1) ? 0 : 15 - (value * 15),
           colorSleep: Theme.of(context).brightness == Brightness.dark
               ? AppColors.darkSleep
               : AppColors.lightSleep,
