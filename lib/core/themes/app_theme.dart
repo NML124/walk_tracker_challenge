@@ -11,7 +11,7 @@ class AppTheme {
     primaryColor: AppColors.lightNavActive,
     cardColor: AppColors.lightCardBackground,
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: Colors.transparent,
       foregroundColor: AppColors.lightPrimaryText,
       elevation: 0,
     ),
@@ -21,7 +21,10 @@ class AppTheme {
         fontWeight: FontWeight.bold,
         color: AppColors.lightPrimaryText,
       ),
-      bodyLarge: TextStyle(fontSize: AppDimens.FONT_SIZE_16, color: AppColors.lightSecondaryText),
+      bodyLarge: TextStyle(
+        fontSize: AppDimens.FONT_SIZE_16,
+        color: AppColors.lightSecondaryText,
+      ),
     ),
     iconTheme: const IconThemeData(color: AppColors.lightNavInactive),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -58,7 +61,7 @@ class AppTheme {
     ),
     iconTheme: const IconThemeData(color: AppColors.darkNavInactive),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Color(0xFF1E1E1E),
+      backgroundColor: AppColors.darkBackground,
       selectedItemColor: AppColors.darkNavActive,
       unselectedItemColor: AppColors.darkNavInactive,
     ),

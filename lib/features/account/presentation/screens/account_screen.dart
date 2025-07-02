@@ -21,7 +21,7 @@ class AccountScreen extends StatelessWidget {
         return ClipPath(
           clipper: CircleClipper(),
           child: Container(
-            color: Colors.white,
+            color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
             padding: EdgeInsetsGeometry.only(
               top: AppDimens.PADDING_32,
               left: AppDimens.PADDING_32,

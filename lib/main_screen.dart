@@ -46,6 +46,9 @@ class _MainScreenState extends State<MainScreen> {
     height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: actualPage == 2
+            ? Theme.of(context).bottomNavigationBarTheme.backgroundColor
+            : null,
         actions: [
           BlocBuilder<AppSettingsBloc, AppSettingsState>(
             builder: (context, state) => Column(
