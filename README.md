@@ -9,6 +9,9 @@ This project is for educational purposes, aiming to deepen understanding of anim
 - Circular progress animations (built with [Rive](https://rive.app/))
 - Smooth page transitions and animated cards
 
+![anim](https://github.com/user-attachments/assets/1bc38968-1025-4e61-a4e9-49685c286d30)
+
+
 ## Key Resources & Inspirations
 
 - **3D Model:** Downloaded from [fab.com](https://www.fab.com/) and customized in Blender.
