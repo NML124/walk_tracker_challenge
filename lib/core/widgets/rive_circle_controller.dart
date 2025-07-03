@@ -2,6 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:rive_native/rive_native.dart' as rive;
 import 'package:walk_tracker_challenge/core/widgets/rive_player.dart';
 
+/// Controller widget for displaying and updating a Rive animated circle with three metrics (calories, steps, sleep).
+///
+/// This widget manages the Rive ViewModel instances for each metric and updates their color, percentage, and thickness
+/// based on the provided properties. It is used to visually represent progress in a circular animation.
+///
+/// Parameters:
+/// - [thickness]: The thickness of the animated circles.
+/// - [colorSleep]: The color for the sleep metric circle.
+/// - [colorSteps]: The color for the steps metric circle.
+/// - [colorCalories]: The color for the calories metric circle.
+/// - [percentageSleep]: The percentage value for the sleep metric.
+/// - [percentageSteps]: The percentage value for the steps metric.
+/// - [percentageCalories]: The percentage value for the calories metric.
+/// - [init]: Callback called after the Rive file is loaded and initialized.
 class RiveCircleController extends StatefulWidget {
   final double thickness;
   final Color colorSleep;
@@ -10,7 +24,6 @@ class RiveCircleController extends StatefulWidget {
   final double percentageSleep;
   final double percentageSteps;
   final double percentageCalories;
-  final VoidCallback init;
   const RiveCircleController({
     super.key,
     required this.thickness,
@@ -20,7 +33,6 @@ class RiveCircleController extends StatefulWidget {
     required this.percentageSleep,
     required this.percentageSteps,
     required this.percentageCalories,
-    required this.init,
   });
 
   @override
@@ -28,46 +40,53 @@ class RiveCircleController extends StatefulWidget {
 }
 
 class _RiveCircleControllerState extends State<RiveCircleController> {
-  late rive.ViewModelInstance viewModelInstance;
-  late rive.ViewModelInstance calorieVM;
-  late rive.ViewModelInstance stepVM;
-  late rive.ViewModelInstance sleepVM;
-  late rive.ViewModelInstanceColor calorieColor;
-  late rive.ViewModelInstanceColor stepColor;
-  late rive.ViewModelInstanceColor sleepColor;
-  late rive.ViewModelInstanceNumber caloriePercent;
-  late rive.ViewModelInstanceNumber stepPercent;
-  late rive.ViewModelInstanceNumber sleepPercent;
-  late rive.ViewModelInstanceNumber calorieThickness;
-  late rive.ViewModelInstanceNumber stepThickness;
-  late rive.ViewModelInstanceNumber sleepThickness;
-  bool fileLoad = false;
+  rive.ViewModelInstance? _calorieVM;
+  rive.ViewModelInstance? _stepVM;
+  rive.ViewModelInstance? _sleepVM;
+
+  rive.ViewModelInstanceColor? _calorieColor;
+  rive.ViewModelInstanceColor? _stepColor;
+  rive.ViewModelInstanceColor? _sleepColor;
+  rive.ViewModelInstanceNumber? _caloriePercent;
+  rive.ViewModelInstanceNumber? _stepPercent;
+  rive.ViewModelInstanceNumber? _sleepPercent;
+  rive.ViewModelInstanceNumber? _calorieThickness;
+  rive.ViewModelInstanceNumber? _stepThickness;
+  rive.ViewModelInstanceNumber? _sleepThickness;
+
+  bool get _isInitialized =>
+      _calorieVM != null && _stepVM != null && _sleepVM != null;
 
   @override
   void dispose() {
-    calorieVM.dispose();
-    stepVM.dispose();
-    sleepVM.dispose();
+    // Dispose Rive ViewModel instances to free resources
+    _calorieVM?.dispose();
+    _stepVM?.dispose();
+    _sleepVM?.dispose();
     super.dispose();
+  }
+
+  void _updateRiveValues() {
+    if (!_isInitialized) return;
+    _caloriePercent?.value = widget.percentageCalories;
+    _stepPercent?.value = widget.percentageSteps;
+    _sleepPercent?.value = widget.percentageSleep;
+    _calorieThickness?.value = widget.thickness;
+    _stepThickness?.value = widget.thickness;
+    _sleepThickness?.value = widget.thickness;
+    _calorieColor?.value = widget.colorCalories;
+    _stepColor?.value = widget.colorSteps;
+    _sleepColor?.value = widget.colorSleep;
   }
 
   @override
   void didUpdateWidget(covariant RiveCircleController oldWidget) {
-    if (fileLoad) {
-      caloriePercent.value = widget.percentageCalories;
-      stepPercent.value = widget.percentageSteps;
-      sleepPercent.value = widget.percentageSleep;
-
-      calorieThickness.value = widget.thickness;
-      stepThickness.value = widget.thickness;
-      sleepThickness.value = widget.thickness;
-    }
     super.didUpdateWidget(oldWidget);
+    _updateRiveValues();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("champions");
     return RivePlayer(
       asset: "assets/rive/circle.riv",
       autoBind: true,
@@ -75,37 +94,23 @@ class _RiveCircleControllerState extends State<RiveCircleController> {
       alignment: Alignment.bottomCenter,
       layoutScaleFactor: 1 / 2.0,
       withViewModelInstance: (viewModelInstance) {
-        this.viewModelInstance = viewModelInstance;
-        calorieVM = viewModelInstance.viewModel("calorie")!;
-        stepVM = viewModelInstance.viewModel("step")!;
-        sleepVM = viewModelInstance.viewModel("sleep")!;
+        _calorieVM = viewModelInstance.viewModel("calorie");
+        _stepVM = viewModelInstance.viewModel("step");
+        _sleepVM = viewModelInstance.viewModel("sleep");
 
-        caloriePercent = calorieVM.number("percentage")!;
-        stepPercent = stepVM.number("percentage")!;
-        sleepPercent = sleepVM.number("percentage")!;
+        _caloriePercent = _calorieVM?.number("percentage");
+        _stepPercent = _stepVM?.number("percentage");
+        _sleepPercent = _sleepVM?.number("percentage");
 
-        calorieColor = calorieVM.color("color")!;
-        stepColor = stepVM.color("color")!;
-        sleepColor = sleepVM.color("color")!;
+        _calorieColor = _calorieVM?.color("color");
+        _stepColor = _stepVM?.color("color");
+        _sleepColor = _sleepVM?.color("color");
 
-        calorieThickness = calorieVM.number("thickness")!;
-        stepThickness = stepVM.number("thickness")!;
-        sleepThickness = sleepVM.number("thickness")!;
+        _calorieThickness = _calorieVM?.number("thickness");
+        _stepThickness = _stepVM?.number("thickness");
+        _sleepThickness = _sleepVM?.number("thickness");
 
-        caloriePercent.value = 50;
-        stepPercent.value = 50;
-        sleepPercent.value = 50;
-
-        calorieColor.value = widget.colorCalories;
-        stepColor.value = widget.colorSteps;
-        sleepColor.value = widget.colorSleep;
-
-        calorieThickness.value = widget.thickness;
-        stepThickness.value = widget.thickness;
-        sleepThickness.value = widget.thickness;
-
-        fileLoad = true;
-        widget.init.call();
+        _updateRiveValues();
       },
     );
   }

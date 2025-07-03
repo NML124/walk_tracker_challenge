@@ -7,6 +7,7 @@ import 'package:walk_tracker_challenge/features/account/presentation/widgets/ani
 import 'package:walk_tracker_challenge/features/daily_activities/presentation/widgets/anim_card_daily_activities_child.dart';
 import 'package:walk_tracker_challenge/features/journal/presentation/widgets/anim_card_journal_child.dart';
 
+/// Animated stack of feature cards for main screen navigation.
 class MainFeatureCardsAnimation extends StatelessWidget {
   const MainFeatureCardsAnimation({super.key, required this.animValue});
   final double animValue;
@@ -19,97 +20,103 @@ class MainFeatureCardsAnimation extends StatelessWidget {
       padding: AppDimens.paddingAll32,
       child: Stack(
         children: [
-          // Daily Activities Card Animation
-          Transform.translate(
-            offset: Offset(
-              -maxSlideDailyActivity * (animValue >= 1 ? 1 : animValue),
-              0,
-            ),
-            child: Transform(
-              alignment: Alignment.centerRight,
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateY((animValue >= 1 ? 1 : animValue) * math.pi / 2),
-              child: Opacity(
-                opacity:
-                    1 -
-                    Interval(
-                      0,
-                      1,
-                      curve: Curves.easeOutExpo,
-                    ).transform(animValue >= 1.0 ? 1.0 : animValue),
-                child: AnimCard(
-                  label: AppLocalizations.of(context)!.dailyGoal,
-                  child: AnimCardDailyActivitiesChild(percentageAchieved: 87),
-                ),
-              ),
-            ),
-          ),
-          // Journal Card Animation
-          Transform.translate(
-            offset: Offset(
-              animValue > 1.0
-                  ? maxSlideJournal * (animValue >= 2 ? 1 : 1 - animValue)
-                  : maxSlideDailyActivity -
-                        maxSlideDailyActivity *
-                            (animValue == 1 ? 1 : animValue),
-              0,
-            ),
-            child: Transform(
-              alignment: animValue > 1.0
-                  ? Alignment.centerRight
-                  : Alignment.centerLeft,
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateY(
-                  animValue > 1.0
-                      ? (animValue >= 2 ? 1 : 1 - animValue) * -math.pi / 2
-                      : ((1 - (animValue == 1 ? 1 : animValue))) * -math.pi / 2,
-                ),
-              child: Opacity(
-                opacity: Interval(0, 1, curve: Curves.easeInQuint).transform(
-                  animValue <= 1.0
-                      ? animValue
-                      : animValue >= 2.0
-                      ? 0
-                      : 2 - animValue,
-                ),
-                child: AnimCard(
-                  label: AppLocalizations.of(context)!.journal,
-                  child: const AnimCardJournalChild(),
-                ),
-              ),
-            ),
-          ),
-          // Account/Profile Card Animation
-          if (animValue > 1)
-            Transform.translate(
-              offset: Offset(
-                maxSlideJournal -
-                    maxSlideJournal * (animValue >= 2 ? 1 : animValue - 1),
-                0,
-              ),
-              child: Transform(
-                alignment: Alignment.centerLeft,
-                transform: Matrix4.identity()
-                  ..setEntry(3, 2, 0.001)
-                  ..rotateY(
-                    ((1 - (animValue >= 2 ? 1 : animValue - 1))) * -math.pi / 2,
-                  ),
-                child: Opacity(
-                  opacity: Interval(
-                    0,
-                    1,
-                    curve: Curves.easeInQuint,
-                  ).transform(animValue >= 2.0 ? 1 : animValue - 1),
-                  child: AnimCard(
-                    label: AppLocalizations.of(context)!.profile,
-                    child: AnimCardAccountChild(),
-                  ),
-                ),
-              ),
-            ),
+          _buildDailyActivitiesCard(context),
+          _buildJournalCard(context),
+          if (animValue > 1) _buildAccountCard(context),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDailyActivitiesCard(BuildContext context) {
+    final double slide = -maxSlideDailyActivity * animValue.clamp(0, 1);
+    final double rotation = animValue.clamp(0, 1) * math.pi / 2;
+    final double opacity =
+        1 -
+        Interval(
+          0,
+          1,
+          curve: Curves.easeOutExpo,
+        ).transform(animValue.clamp(0, 1));
+    return Transform.translate(
+      offset: Offset(slide, 0),
+      child: Transform(
+        alignment: Alignment.centerRight,
+        transform: Matrix4.identity()
+          ..setEntry(3, 2, 0.001)
+          ..rotateY(rotation),
+        child: Opacity(
+          opacity: opacity,
+          child: AnimCard(
+            label: AppLocalizations.of(context)!.dailyGoal,
+            child: const AnimCardDailyActivitiesChild(percentageAchieved: 87),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildJournalCard(BuildContext context) {
+    final bool isSecondPage = animValue > 1.0;
+    final double slide = isSecondPage
+        ? maxSlideJournal * (animValue >= 2 ? 1 : 1 - animValue)
+        : maxSlideDailyActivity - maxSlideDailyActivity * animValue.clamp(0, 1);
+    final Alignment alignment = isSecondPage
+        ? Alignment.centerRight
+        : Alignment.centerLeft;
+    final double rotation = isSecondPage
+        ? (animValue >= 2 ? 1 : 1 - animValue) * -math.pi / 2
+        : (1 - animValue.clamp(0, 1)) * -math.pi / 2;
+    final double opacity = Interval(0, 1, curve: Curves.easeInQuint).transform(
+      animValue <= 1.0
+          ? animValue
+          : animValue >= 2.0
+          ? 0
+          : 2 - animValue,
+    );
+    return Transform.translate(
+      offset: Offset(slide, 0),
+      child: Transform(
+        alignment: alignment,
+        transform: Matrix4.identity()
+          ..setEntry(3, 2, 0.001)
+          ..rotateY(rotation),
+        child: Opacity(
+          opacity: opacity,
+          child: AnimCard(
+            label: AppLocalizations.of(context)!.journal,
+            child: const AnimCardJournalChild(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAccountCard(BuildContext context) {
+    final double clampedAnim = (animValue > 1 ? animValue - 1 : 0)
+        .clamp(0, 1)
+        .toDouble();
+    final double slide = maxSlideJournal - maxSlideJournal * clampedAnim;
+    final double rotation = (1 - clampedAnim) * -math.pi / 2;
+    final double opacity = Interval(
+      0,
+      1,
+      curve: Curves.easeInQuint,
+    ).transform(clampedAnim);
+    return Transform.translate(
+      offset: Offset(slide, 0),
+      child: Transform(
+        alignment: Alignment.centerLeft,
+        transform: Matrix4.identity()
+          ..setEntry(3, 2, 0.001)
+          ..rotateY(rotation),
+        child: Opacity(
+          opacity: opacity,
+          child: AnimCard(
+            label: AppLocalizations.of(context)!.profile,
+            child: const AnimCardAccountChild(),
+          ),
+        ),
       ),
     );
   }
