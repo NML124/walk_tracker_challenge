@@ -29,7 +29,11 @@ class AppSettingsBloc extends Bloc<AppSettingsEvent, AppSettingsState> {
   AppSettingsBloc()
     : super(
         AppSettingsState(
-          themeMode: ThemeMode.system,
+          themeMode:
+              WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+                  Brightness.dark
+              ? ThemeMode.dark
+              : ThemeMode.light,
           locale:
               WidgetsBinding.instance.platformDispatcher.locale.languageCode ==
                       'en' ||

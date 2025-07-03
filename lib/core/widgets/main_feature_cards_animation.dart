@@ -76,7 +76,7 @@ class MainFeatureCardsAnimation extends StatelessWidget {
                 ),
                 child: AnimCard(
                   label: AppLocalizations.of(context)!.journal,
-                  child: AnimCardJournalChild(date: DateTime.now()),
+                  child: const AnimCardJournalChild(),
                 ),
               ),
             ),

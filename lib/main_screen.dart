@@ -44,118 +44,123 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     width = MediaQuery.sizeOf(context).width;
     height = MediaQuery.sizeOf(context).height;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: actualPage == 2
-            ? Theme.of(context).bottomNavigationBarTheme.backgroundColor
-            : null,
-        actions: [
-          BlocBuilder<AppSettingsBloc, AppSettingsState>(
-            builder: (context, state) => Column(
-              children: [
-                Switch(
-                  value: state.themeMode == ThemeMode.dark,
-                  onChanged: (val) {
-                    context.read<AppSettingsBloc>().add(
-                      ChangeThemeMode(val ? ThemeMode.dark : ThemeMode.light),
-                    );
-                  },
-                ),
-              ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: actualPage == 2
+              ? Theme.of(context).bottomNavigationBarTheme.backgroundColor
+              : null,
+          actions: [
+            BlocBuilder<AppSettingsBloc, AppSettingsState>(
+              builder: (context, state) => Column(
+                children: [
+                  Switch(
+                    value: state.themeMode == ThemeMode.dark,
+                    onChanged: (val) {
+                      context.read<AppSettingsBloc>().add(
+                        ChangeThemeMode(val ? ThemeMode.dark : ThemeMode.light),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(width: AppDimens.PADDING_16),
-          BlocBuilder<AppSettingsBloc, AppSettingsState>(
-            builder: (context, state) => DropdownButton<Locale>(
-              value: state.locale,
-              items: const [
-                DropdownMenuItem(value: Locale('en'), child: Text('English')),
-                DropdownMenuItem(value: Locale('fr'), child: Text('Français')),
-              ],
-              onChanged: (locale) {
-                if (locale != null) {
-                  context.read<AppSettingsBloc>().add(ChangeLocale(locale));
-                }
+            SizedBox(width: AppDimens.PADDING_16),
+            BlocBuilder<AppSettingsBloc, AppSettingsState>(
+              builder: (context, state) => DropdownButton<Locale>(
+                value: state.locale,
+                items: const [
+                  DropdownMenuItem(value: Locale('en'), child: Text('English')),
+                  DropdownMenuItem(
+                    value: Locale('fr'),
+                    child: Text('Français'),
+                  ),
+                ],
+                onChanged: (locale) {
+                  if (locale != null) {
+                    context.read<AppSettingsBloc>().add(ChangeLocale(locale));
+                  }
+                },
+              ),
+            ),
+            SizedBox(width: AppDimens.PADDING_16),
+          ],
+        ),
+        body: Stack(
+          children: [
+            ValueListenableBuilder(
+              valueListenable: scrollXPosition,
+              builder: (context, value, child) {
+                return RiveCircleAnimationSection(
+                  value: value,
+                  width: width,
+                  height: height,
+                );
               },
             ),
-          ),
-          SizedBox(width: AppDimens.PADDING_16),
-        ],
-      ),
-      body: Stack(
-        children: [
-          ValueListenableBuilder(
-            valueListenable: scrollXPosition,
-            builder: (context, value, child) {
-              return RiveCircleAnimationSection(
-                value: value,
-                width: width,
-                height: height,
-              );
-            },
-          ),
-          ValueListenableBuilder(
-            valueListenable: scrollXPosition,
-            builder: (context, value, child) {
-              return AnimPerso(
-                page: actualPage,
-                animationScrollX: value,
-                height: height,
-                width: width,
-              );
-            },
-          ),
-          PageView(
-            controller: pageController,
-            children: [
-              DailyActivitiesScreen(),
-              JournalScreen(),
-              AccountScreen(),
-            ],
-          ),
-          ValueListenableBuilder(
-            valueListenable: scrollXPosition,
-            builder: (context, value, child) {
-              // Updates currentPage when passing a milestone (1, 2, ...)
-              newPage = value.round().clamp(0, 2);
-              if (actualPage != newPage) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  setState(() {
-                    actualPage = newPage;
+            ValueListenableBuilder(
+              valueListenable: scrollXPosition,
+              builder: (context, value, child) {
+                return AnimPerso(
+                  page: actualPage,
+                  animationScrollX: value,
+                  height: height,
+                  width: width,
+                );
+              },
+            ),
+            PageView(
+              controller: pageController,
+              children: [
+                DailyActivitiesScreen(),
+                JournalScreen(),
+                AccountScreen(),
+              ],
+            ),
+            ValueListenableBuilder(
+              valueListenable: scrollXPosition,
+              builder: (context, value, child) {
+                // Updates currentPage when passing a milestone (1, 2, ...)
+                newPage = value.round().clamp(0, 2);
+                if (actualPage != newPage) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    setState(() {
+                      actualPage = newPage;
+                    });
                   });
-                });
-              }
-              return MainFeatureCardsAnimation(animValue: value);
-            },
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: actualPage,
-        onTap: (value) {
-          pageController.animateToPage(
-            value,
-            duration: Duration(seconds: 1),
-            curve: Curves.ease,
-          );
-          setState(() {
-            actualPage = value;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.timeline),
-            label: AppLocalizations.of(context)!.dailyGoal,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.access_time_rounded),
-            label: AppLocalizations.of(context)!.journal,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_2_outlined),
-            label: AppLocalizations.of(context)!.profile,
-          ),
-        ],
+                }
+                return MainFeatureCardsAnimation(animValue: value);
+              },
+            ),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: actualPage,
+          onTap: (value) {
+            pageController.animateToPage(
+              value,
+              duration: Duration(seconds: 1),
+              curve: Curves.ease,
+            );
+            setState(() {
+              actualPage = value;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.timeline),
+              label: AppLocalizations.of(context)!.dailyGoal,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.access_time_rounded),
+              label: AppLocalizations.of(context)!.journal,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_2_outlined),
+              label: AppLocalizations.of(context)!.profile,
+            ),
+          ],
+        ),
       ),
     );
   }

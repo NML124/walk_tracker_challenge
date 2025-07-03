@@ -61,7 +61,6 @@ class MyApp extends StatelessWidget {
           ],
           child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
             builder: (context, settingsState) {
-              print("I build");
               return MaterialApp(
                 title: 'Walk Tracker Challenge',
                 theme: AppTheme.lightTheme,

@@ -5,8 +5,11 @@ class FormatUtils {
     return DateFormat.Hm(Intl.getCurrentLocale()).format(dateTime);
   }
 
-  static String formatTimeMonthAndYear(DateTime dateTime) {
-    return DateFormat.yMMMM(Intl.getCurrentLocale()).format(dateTime);
+  static String formatTimeMonthAndYear(
+    DateTime dateTime, {
+    required String local,
+  }) {
+    return DateFormat.yMMMM(local).format(dateTime);
   }
 
   static String capitalizeFirst(String s) {

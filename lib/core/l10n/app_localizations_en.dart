@@ -55,7 +55,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String walkDistanceTime(double distance, int duration) {
-    return '${distance}km in ${duration}mins';
+    return '$distance km in $duration mins';
   }
 
   @override

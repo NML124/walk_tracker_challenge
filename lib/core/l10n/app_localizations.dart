@@ -191,7 +191,7 @@ abstract class AppLocalizations {
   /// Displays walking distance and duration
   ///
   /// In en, this message translates to:
-  /// **'{distance}km in {duration}mins'**
+  /// **'{distance} km in {duration} mins'**
   String walkDistanceTime(double distance, int duration);
 
   /// No description provided for @settings.
