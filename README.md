@@ -34,7 +34,7 @@ This project is for educational purposes, aiming to deepen understanding of anim
 ### Installation
 1. **Clone the repository:**
    ```sh
-   git clone <your-repo-url>
+   git clone https://github.com/NML124/walk_tracker_challenge.git
    cd walk_tracker_challenge
    ```
 2. **Install dependencies:**
