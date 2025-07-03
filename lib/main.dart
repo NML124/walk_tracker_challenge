@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walk_tracker_challenge/core/l10n/app_localizations.dart';
@@ -18,6 +19,10 @@ import 'package:rive_native/rive_native.dart' as rive;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]); // To turn off landscape mode
   await rive.RiveNative.init();
   runApp(const MyApp());
 }
